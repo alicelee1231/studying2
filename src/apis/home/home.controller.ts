@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post, Render, Req } from '@nestjs/common';
+import { Controller, Get, Render, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { HomeService } from './home.service';
 import * as jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 @Controller()
 export class HomeController {
@@ -18,8 +19,9 @@ export class HomeController {
     } else {
       return { nickname: '' };
     }
-
-    if (accessToken !== undefined) {
+    if (accessToken === '') {
+      return { nickname: '' };
+    } else if (accessToken !== undefined) {
       const checkToken = jwt.verify(accessToken, 'myRefreshkey');
       return { nickname: checkToken['nickname'] };
     } else {

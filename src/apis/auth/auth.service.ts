@@ -8,9 +8,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
-import { UserService } from '../user/user.service';
 import * as jwt from 'jsonwebtoken';
 import { Cache } from 'cache-manager';
+import 'dotenv/config';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +37,8 @@ export class AuthService {
       { nickname: user.nickname },
       { secret: 'myRefreshkey', expiresIn: '6h' },
     );
+
+    console.log(refreshToken);
     res.cookie('refreshToken', refreshToken);
   }
 
@@ -58,12 +60,12 @@ export class AuthService {
     return userFound;
   }
 
-  async logout({ req, data }) {
-    const token = req.headers.cookie.replace;
-    console.log(token);
+  async logout({ req, res }) {
+    const token = req.headers.cookie.replace('refreshToken=', '');
     try {
-      jwt.verify(token, 'myToken');
-      // await this.cacheManager.set(token, 'mytoken', { ttl: 36000 });
+      jwt.verify(token, 'myRefreshkey');
+      res.cookie('refreshToken', '');
+      res.redirect('http://localhost:3000');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();

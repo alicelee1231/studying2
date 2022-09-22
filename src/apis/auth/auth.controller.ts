@@ -2,9 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  Param,
   Post,
-  Render,
   Req,
   Res,
   UnprocessableEntityException,
@@ -12,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -67,24 +64,9 @@ export class AuthController {
   }
 
   @Get('/logout')
-  @Render('logout')
-  async logout(
-    @Body() data, //
-    @Req() req: Request,
-    @Res() res: Response,
-  ) {
-    //   // let token = req.headers.cookie;
-    //   // console.log(req, '==============');
-    //   // let token;
-    //   // if (token) token = token.split('=')[1];
-    //   // console.log(token, '11111111111111');
-    return await this.authService.logout({ req, data });
-    //   // try {
-    //   //   const myToken = jwt.verify(Token, refreshToken);
-
-    //   //   return true;
-    //   // } catch {
-    //   //   throw new UnauthorizedException();
+  async logout(@Req() req: Request, @Res() res: Response) {
+    const result = await this.authService.logout({ req, res });
+    console.log(result);
   }
 
   @Get('/login/google')

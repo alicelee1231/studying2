@@ -35,7 +35,7 @@ import * as redisStore from 'cache-manager-redis-store';
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://172.18.17.3:6379',
+      url: 'redis://my-redis:6379',
       isGlobal: true,
     }),
   ],
