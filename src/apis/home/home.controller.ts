@@ -28,4 +28,25 @@ export class HomeController {
       return { nickname: '' };
     }
   }
+
+  @Get('/about')
+  @Render('about')
+  async about(
+    @Req() req: Request, //
+  ) {
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '' };
+    }
+    if (accessToken === '') {
+      return { nickname: '' };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+      return { nickname: checkToken['nickname'] };
+    } else {
+      return { nickname: '' };
+    }
+  }
 }

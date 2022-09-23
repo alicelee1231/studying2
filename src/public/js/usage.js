@@ -1,6 +1,5 @@
 function aaa() {
   const title = document.getElementById('title').value;
-  const userId = document.getElementById('userId').value;
   const content = document.getElementById('content').value;
   const areas = document.getElementById('areas');
   const area = areas.options[areas.selectedIndex].value;
@@ -8,14 +7,12 @@ function aaa() {
   const sort = type.options[type.selectedIndex].value;
   const period = document.getElementById('period').value;
   const goal = document.getElementById('goal').value;
-
   //
   axios
 
     .post('/usage', {
       area,
       title,
-      userId,
       content,
       sort,
       period,
@@ -24,7 +21,6 @@ function aaa() {
 
     .then((res) => {
       div.innerText = res.data.title;
-      div.innerText = res.data.userId;
       div.innerText = res.data.area;
       div.innerText = res.data.content;
       div.innerText = res.data.sort;

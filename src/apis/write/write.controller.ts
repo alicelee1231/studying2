@@ -1,11 +1,12 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { WriteService } from './write.service';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('write')
 export class WriteController {
   constructor(private readonly writeService: WriteService) {}
 
-  //특정 게시글 불러오기
   @Get('/:id')
   @Render('write')
   async write(@Param('id') id: string) {
@@ -13,17 +14,26 @@ export class WriteController {
     return { data: result };
   }
 
-  //글 작성 페이지 불러오기
   @Get('/')
   @Render('write')
-  async load() {
-    return { data: 'testing...' };
+  async load(
+    @Req() req: Request, //
+  ) {
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '' };
+    }
+    if (accessToken === '') {
+      return { nickname: '' };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+      return {
+        nickname: checkToken['nickname'],
+      };
+    } else {
+      return { nickname: '' };
+    }
   }
-
-  // @Get('/:id')
-  // @Render('write')
-  // async update(@Param('id') id: string) {
-  //   const result = await this.writeService.update(id);
-  //   return { data: result };
-  // }
 }

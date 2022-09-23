@@ -10,6 +10,11 @@
 
     <!-- axios 사용 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+    src="https://kit.fontawesome.com/8ddf9e168a.js"
+    crossorigin="anonymous"
+  ></script>
+
     <title>글쓰기</title>
   </head>
   <header id="header">
@@ -18,10 +23,16 @@
         <a href="/">SaveWorld</a>
       </div>
       <nav>
-        <li><a href="#">소개</a></li>
-        <li><a href="#">재활용 정보</a></li>
+        <li><a href="/about">소개</a></li>
         <li><a href="/usage">우리들의 사용량</a></li>
-        <li><a class="loginText" href="/login">로그인</a></li>
+        <% if(nickname){%>
+          <div><%=nickname%>님 환영합니다.</div>
+          <span class="logout"
+            ><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a
+          ></span>
+          <%} else {%>
+          <li><a href="/login">로그인</a></li>
+          <%}%>
       </nav>
     </div>
   </header>

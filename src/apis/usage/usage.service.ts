@@ -11,21 +11,19 @@ export class UsageService {
   ) {}
 
   async find(page: string, limit: string) {
-    const parsedPage = parseInt(page);
-    const parsedLimit = parseInt(limit);
-    const count = await this.usageRepository.count();
-    const maxPage = Math.ceil(count / parsedLimit);
+    // const parsedPage = parseInt(page);
+    // const parsedLimit = parseInt(limit);
+    // const count = await this.usageRepository.count();
+    // const maxPage = Math.ceil(count / parsedLimit);
 
     const result = await this.usageRepository.find({
       order: {
         id: 'desc',
       },
-      skip: (parsedPage - 1) * parsedLimit,
-      take: parsedLimit,
+      //   skip: (parsedPage - 1) * parsedLimit,
+      //   take: parsedLimit,
     });
-
-    // const count = await this.usageRepository.count();
-
+    console.log(result, '===============');
     return result;
   }
 
@@ -38,6 +36,7 @@ export class UsageService {
   }
 
   async create(data) {
+    console.log(data, 'fadljhfaljkdfhaldkfhaldkfhl');
     const date = new Date();
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -47,7 +46,6 @@ export class UsageService {
       counting: data.counting,
       title: data.title,
       area: data.area,
-      userId: data.userId,
       content: data.content,
       createdAt: currentDate,
       sort: data.sort,

@@ -109,6 +109,22 @@ header .desktopHeader .login .loginText:hover {
   font-size: 18px;
 }
 
+.modify {
+  display: block !important;
+}
+
+.mo1 {
+  width: 50% !important;
+  margin-left: 39px;
+  padding: 10px;
+}
+
+.mo2 {
+  width: 20% !important;
+  padding: 10px;
+  font-size: 17px !important;
+}
+
 .check {
   display: flex;
   flex-direction: column;
