@@ -19,4 +19,14 @@ export class UserController {
     const hashedPwd = await bcrypt.hash(pwd, 8);
     return this.userService.create({ pwd: hashedPwd, userInfo });
   }
+
+  @Post('/signup')
+  async checkNickname(@Body() data) {
+    const checking = await this.userService.findNickname({ data });
+    if (!checking) {
+      return '사용 가능 닉네임입니다.';
+    } else {
+      return '사용 불가 닉네임입니다.';
+    }
+  }
 }

@@ -1,17 +1,22 @@
 document.getElementById('loginBtn').addEventListener('click', () => {
   const getId = document.getElementById('id').value;
   const getPwd = document.getElementById('pwd').value;
-  const data = [getId, getPwd];
-  if (getId == '') {
+  if (getId === '') {
     alert('아이디를 입력해주세요.');
-  } else if (getPwd == '') {
+  } else if (getPwd === '') {
     alert('비밀번호를 입력해주세요.');
-  } else {
-    axios
-      .post('/login', {
-        data,
-      })
-      .then((res) => console.log(res.data));
-    window.location = '/';
   }
+  axios
+    .post('/login', {
+      userId: getId,
+      pwd: getPwd,
+    })
+    .then(function (res) {
+      window.location = '/';
+    })
+    .catch(function (error) {
+      if (error.response.data) {
+        alert(error.response.data.message);
+      }
+    });
 });

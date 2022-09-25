@@ -17,14 +17,15 @@ export class DetailController {
     private readonly detailService: DetailService, //
   ) {}
 
-  @Get('/')
+  @Get('/detail')
   @Render('detail')
-  async home(
+  async details(
     @Req() req: Request, //
   ) {
     let accessToken = '';
     if (req.headers.cookie) {
       accessToken = req.headers.cookie.split('refreshToken=')[1];
+      console.log(accessToken, '아아악');
     } else {
       return { nickname: '' };
     }

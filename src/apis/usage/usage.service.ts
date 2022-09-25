@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUsageInput } from './dto/create.usage.input';
 import { Usage } from './entities/usage.entity';
 
 @Injectable()
@@ -24,7 +23,7 @@ export class UsageService {
       //   skip: (parsedPage - 1) * parsedLimit,
       //   take: parsedLimit,
     });
-    console.log(result, '===============');
+    //   console.log(result, '===============');
     return result;
   }
 
@@ -36,7 +35,7 @@ export class UsageService {
     });
   }
 
-  async create(CreateUsageInput) {
+  async create(createUsageInput) {
     const date = new Date();
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -44,7 +43,7 @@ export class UsageService {
     const currentDate = `${yyyy}-${mm}-${dd}`;
     return await this.usageRepository.save({
       createdAt: currentDate,
-      ...CreateUsageInput,
+      ...createUsageInput,
       // counting: data.counting,
       // title: data.title,
       // area: data.area,

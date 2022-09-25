@@ -7,6 +7,8 @@ function aaa() {
   const sort = type.options[type.selectedIndex].value;
   const period = document.getElementById('period').value;
   const goal = document.getElementById('goal').value;
+  const nickname = document.getElementById('userId').value;
+
   //
   axios
 
@@ -17,6 +19,7 @@ function aaa() {
       sort,
       period,
       goal,
+      nickname,
     })
 
     .then((res) => {
@@ -26,6 +29,7 @@ function aaa() {
       div.innerText = res.data.sort;
       div.innerText = res.data.period;
       div.innerText = res.data.goal;
+      div.innerText = res.data.nickname;
     });
 
   fetch('/usage').then(function () {

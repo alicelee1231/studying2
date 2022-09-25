@@ -10,6 +10,7 @@ import {
 import { UsageService } from './usage.service';
 import * as jwt from 'jsonwebtoken';
 import { Request } from 'express';
+import { CreateUsageInput } from './dto/create.usage.input';
 
 @Controller()
 export class UsageController {
@@ -50,7 +51,7 @@ export class UsageController {
   }
 
   @Post('/usage')
-  async click(@Body() data) {
-    return await this.usageService.create(data);
+  async click(@Body() createUsageInput: CreateUsageInput) {
+    return await this.usageService.create(createUsageInput);
   }
 }

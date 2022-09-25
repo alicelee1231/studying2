@@ -1,5 +1,5 @@
-import { Controller, Get, Render, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Render, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { HomeService } from './home.service';
 import * as jwt from 'jsonwebtoken';
 import 'dotenv/config';

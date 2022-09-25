@@ -31,13 +31,13 @@ export class AuthService {
     return accessToken;
   }
 
-  setRefreshToken({ user, res, req }) {
+  setRefreshToken({ user, req, res }) {
     const refreshToken = this.jwtService.sign(
       { nickname: user.nickname },
       { secret: 'myRefreshkey', expiresIn: '6h' },
     );
 
-    console.log(refreshToken);
+    console.log(refreshToken, 'dfajh');
     res.cookie('refreshToken', refreshToken);
   }
 

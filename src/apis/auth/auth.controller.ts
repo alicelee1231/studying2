@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { UserController } from '../user/user.controller';
 import { Request, Response } from 'express';
@@ -39,34 +39,31 @@ export class AuthController {
     @Req() req: Request,
     @Res() res: Response, //
   ) {
-    const userId = data.data[0];
-    const pwd = data.data[1];
+    const userId = data.userId;
+    const pwd = data.pwd;
     const user = await this.userService.findNickname({ data: userId });
     if (!user) {
-      throw new UnprocessableEntityException(
-        console.log('닉네임이 존재하지 않습니다.'),
-      );
+      throw new UnprocessableEntityException('닉네임이 일치하지 않습니다.');
     }
-    console.log(DataSource, user.pwd);
     const isAuth = await bcrypt.compare(pwd, user.pwd);
-
-    if (!isAuth)
-      throw new UnprocessableEntityException(
-        console.log('비밀번호가 일치하지 않습니다.'),
-      );
+    if (!isAuth) {
+      throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
+    }
     await this.authService.setRefreshToken({
       user,
-      res,
       req,
+      res,
     });
-    const accessToken = this.authService.getAccessToken({ user });
-    res.send(accessToken);
+
+    // const accessToken = this.authService.getAccessToken({ user });
+    res.send('token');
+    return true;
   }
 
   @Get('/logout')
   async logout(@Req() req: Request, @Res() res: Response) {
     const result = await this.authService.logout({ req, res });
-    console.log(result);
+    return result;
   }
 
   @Get('/login/google')
