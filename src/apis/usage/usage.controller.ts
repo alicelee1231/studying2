@@ -11,6 +11,7 @@ import { UsageService } from './usage.service';
 import * as jwt from 'jsonwebtoken';
 import { Request } from 'express';
 import { CreateUsageInput } from './dto/create.usage.input';
+import 'dotenv/config';
 
 @Controller()
 export class UsageController {
@@ -24,16 +25,16 @@ export class UsageController {
   ) {
     const result = await this.usageService.find(query.page, query.limit);
 
-    let accessToken = '';
+    let token = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
+      token = req.headers.cookie.split('token=')[1];
     } else {
       return { nickname: '', data: result, currentPage: query.page };
     }
-    if (accessToken === '') {
+    if (token === '') {
       return { nickname: '', data: result, currentPage: query.page };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+    } else if (token !== undefined) {
+      const checkToken = jwt.verify(token, process.env.KEY);
       return {
         nickname: checkToken['nickname'],
         data: result,

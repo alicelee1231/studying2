@@ -49,7 +49,7 @@ export class AuthController {
     if (!isAuth) {
       throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
     }
-    await this.authService.setRefreshToken({
+    await this.authService.setToken({
       user,
       req,
       res,

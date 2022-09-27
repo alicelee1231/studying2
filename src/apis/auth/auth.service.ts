@@ -22,23 +22,23 @@ export class AuthService {
     private readonly cacheManager: Cache,
   ) {}
 
-  getAccessToken({ user }) {
-    const accessToken = this.jwtService.sign(
+  // getAccessToken({ user }) {
+  //   const accessToken = this.jwtService.sign(
+  //     { nickname: user.nickname },
+  //     { secret: 'myAccesskey', expiresIn: '1s' },
+  //   );
+
+  //   return accessToken;
+  // }
+
+  setToken({ user, req, res }) {
+    const token = this.jwtService.sign(
       { nickname: user.nickname },
-      { secret: 'myAccesskey', expiresIn: '1s' },
+      { secret: process.env.KEY, expiresIn: '6h' },
     );
 
-    return accessToken;
-  }
-
-  setRefreshToken({ user, req, res }) {
-    const refreshToken = this.jwtService.sign(
-      { nickname: user.nickname },
-      { secret: 'myRefreshkey', expiresIn: '6h' },
-    );
-
-    console.log(refreshToken, 'dfajh');
-    res.cookie('refreshToken', refreshToken);
+    console.log(token, 'dfajh');
+    res.cookie('token', token);
   }
 
   async createSocialUser({ req, res }) {
@@ -54,16 +54,16 @@ export class AuthService {
         nickname: req.user.nickname,
       });
     }
-    this.setRefreshToken({ user: userFound, req, res });
+    this.setToken({ user: userFound, req, res });
     res.redirect('http://localhost:3000');
     return userFound;
   }
 
   async logout({ req, res }) {
-    const token = req.headers.cookie.replace('refreshToken=', '');
+    const token = req.headers.cookie.replace('token=', '');
     try {
-      jwt.verify(token, 'myRefreshkey');
-      res.cookie('refreshToken', '');
+      jwt.verify(token, process.env.KEY);
+      res.cookie('token', '');
       res.redirect('http://localhost:3000');
       return '로그아웃 성공';
     } catch {

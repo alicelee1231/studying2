@@ -1,43 +1,11 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Render,
-  Req,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Render } from '@nestjs/common';
 import { DetailService } from './detail.service';
-import * as jwt from 'jsonwebtoken';
-import { Request } from 'express';
 
 @Controller('detail')
 export class DetailController {
   constructor(
     private readonly detailService: DetailService, //
   ) {}
-
-  @Get('/detail')
-  @Render('detail')
-  async details(
-    @Req() req: Request, //
-  ) {
-    let accessToken = '';
-    if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
-      console.log(accessToken, '아아악');
-    } else {
-      return { nickname: '' };
-    }
-    if (accessToken === '') {
-      return { nickname: '' };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
-      return { nickname: checkToken['nickname'] };
-    } else {
-      return { nickname: '' };
-    }
-  }
 
   @Get('/:id')
   @Render('detail')

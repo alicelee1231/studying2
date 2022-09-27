@@ -13,16 +13,16 @@ export class HomeController {
   async home(
     @Req() req: Request, //
   ) {
-    let accessToken = '';
+    let token = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
+      token = req.headers.cookie.split('token=')[1];
     } else {
       return { nickname: '' };
     }
-    if (accessToken === '') {
+    if (token === '') {
       return { nickname: '' };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+    } else if (token !== undefined) {
+      const checkToken = jwt.verify(token, process.env.KEY);
       return { nickname: checkToken['nickname'] };
     } else {
       return { nickname: '' };
@@ -34,16 +34,16 @@ export class HomeController {
   async about(
     @Req() req: Request, //
   ) {
-    let accessToken = '';
+    let token = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
+      token = req.headers.cookie.split('token=')[1];
     } else {
       return { nickname: '' };
     }
-    if (accessToken === '') {
+    if (token === '') {
       return { nickname: '' };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+    } else if (token !== undefined) {
+      const checkToken = jwt.verify(token, process.env.KEY);
       return { nickname: checkToken['nickname'] };
     } else {
       return { nickname: '' };

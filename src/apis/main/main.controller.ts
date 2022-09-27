@@ -14,5 +14,3 @@ export class MainController {
   @Render('login')
   async login(@Req() req: Request) {}
 }
-//jwt로 확인하는거
-//'Refreshtoken'이 앞부분지우고 뒷부분만 들어오기
