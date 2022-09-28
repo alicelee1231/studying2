@@ -68,6 +68,10 @@ header .desktopHeader .login .loginText:hover {
   transition: 0.1s linear;
 }
 
+.loginId .loging {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 /**  line_wrap  ***/
 .line_wrap {
   border-top: 2px solid #000;

@@ -3,7 +3,6 @@ document.getElementById('getWrite').addEventListener('click', () => {
     .post('/write', {})
     .then(function (response) {
       window.location = '/write';
-      console.log('여기다');
     })
     .catch(function (error) {
       if (error) {

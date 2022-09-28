@@ -4,15 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/6dca3e9c71.js"
-      crossorigin="anonymous"
-    ></script>
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/usage.css" />
     <title>우리들의 사용량 보기</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.css">
-  <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script
   src="https://kit.fontawesome.com/8ddf9e168a.js"
   crossorigin="anonymous"
@@ -28,14 +24,17 @@
         <nav>
           <li><a href="/about">소개</a></li>
           <li><a href="/usage?page=1&limit=10">우리들의 사용량</a></li>  
-          <% if(nickname){%>
-            <div><%=nickname%>님 환영합니다.</div>
+          <div class="loginId">
+            <% if(nickname){%>
+            <span class="loging"><%=nickname%>님 환영합니다.</span>
             <span class="logout"
-            ><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a
-          ></span>
-          <%} else {%>
-          <li><a href="/login">로그인</a></li>
-          <%}%>
+              ><a href="/logout"
+                ><i class="fa-solid fa-right-from-bracket"></i></a
+            ></span>
+            <%} else {%>
+            <li><a href="/login">로그인</a></li>
+            <%}%>
+          </div>
         </nav>
       </div>
     </header>
@@ -43,7 +42,7 @@
     <div class="line_wrap">우리들의 사용량 보기</div>
 
     <div class="write_wrap">
-      <a href="/write">글쓰기</a>
+      <div class="write" id="getWrite">글쓰기</div>
     </div>
 
     <div class="usage_wrapper">
@@ -86,9 +85,9 @@
             <i class="arrow fa-solid fa-angles-left"></i>
           </a>
 
-          <!-- <a href="" id="left" class="right">
+          <a href="" id="left" class="right">
             <i class="arrow fa-solid fa-angle-left"></i>
-          </a> -->
+          </a>
 
           <div class="pageNum" id="pageNum">
             <% ['1','2','3','4','5'].forEach(pageNum => { %>
@@ -103,9 +102,9 @@
             <% }) %>
           </div>
 
-          <!-- <a href="" id="right" class="right">
+          <a href="" id="right" class="right">
             <i class="arrow fa-solid fa-angle-right"></i>
-          </a> -->
+          </a>
 
           <a href="/recruit_art/all?id=7" id="rightEnd" class="rightEnd">
             <i class="arrow fa-solid fa-angles-right"></i>
@@ -120,5 +119,6 @@
 
 
     <script src="/js/usage.js"></script>
+    <script src="/js/write.js"></script>
   </body>
 </html>

@@ -22,22 +22,11 @@ export class AuthService {
     private readonly cacheManager: Cache,
   ) {}
 
-  // getAccessToken({ user }) {
-  //   const accessToken = this.jwtService.sign(
-  //     { nickname: user.nickname },
-  //     { secret: 'myAccesskey', expiresIn: '1s' },
-  //   );
-
-  //   return accessToken;
-  // }
-
   setToken({ user, req, res }) {
     const token = this.jwtService.sign(
       { nickname: user.nickname },
       { secret: process.env.KEY, expiresIn: '6h' },
     );
-
-    console.log(token, 'dfajh');
     res.cookie('token', token);
   }
 

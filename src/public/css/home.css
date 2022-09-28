@@ -78,6 +78,11 @@ header .id {
   cursor: pointer;
 }
 
+.loginId .loging {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
 /*******  main_wrap  ********/
 .main_wrap {
   position: relative;

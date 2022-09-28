@@ -70,6 +70,10 @@ header .desktopHeader .login .loginText:hover {
   transition: 0.1s linear;
 }
 
+.loginId .loging {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
 /**  line_wrap  ***/
 .line_wrap {
   border-top: 2px solid #000;
@@ -88,7 +92,7 @@ header .desktopHeader .login .loginText:hover {
   padding: 20px 0;
 }
 
-.write_wrap a {
+.write_wrap .write {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,6 +103,7 @@ header .desktopHeader .login .loginText:hover {
   border-radius: 10px;
   font-weight: bold;
   transition: transform 250ms;
+  cursor: pointer;
 }
 
 .write_wrap a:hover {

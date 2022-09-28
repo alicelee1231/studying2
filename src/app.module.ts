@@ -3,7 +3,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HomeModule } from './apis/home/home.module';
 import { MainModule } from './apis/main/main.module';
 import { UsageModule } from './apis/usage/usage.module';
-import { WriteModule } from './apis/write/write.module';
 import { UpdateModule } from './apis/update/update.module';
 import { DetailModule } from './apis/detail/detail.module';
 import { UserModule } from './apis/user/user.module';
@@ -18,7 +17,6 @@ import * as redisStore from 'cache-manager-redis-store';
     UsageModule,
     AuthModule,
     UpdateModule,
-    WriteModule,
     UserModule,
     DetailModule,
     TypeOrmModule.forRoot({
