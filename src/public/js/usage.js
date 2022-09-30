@@ -1,4 +1,4 @@
-function aaa() {
+function add() {
   const title = document.getElementById('title').value;
   const content = document.getElementById('content').value;
   const areas = document.getElementById('areas');
@@ -7,9 +7,8 @@ function aaa() {
   const sort = type.options[type.selectedIndex].value;
   const period = document.getElementById('period').value;
   const goal = document.getElementById('goal').value;
-  const nickname = document.getElementById('userId').value;
+  const nickname = document.getElementById('nickname').value;
 
-  //
   axios
 
     .post('/usage', {

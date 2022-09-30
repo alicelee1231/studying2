@@ -24,6 +24,7 @@ export class UsageController {
     @Query() query: { page: string; limit: string; maxPage: string },
     @Req() req: Request, //
   ) {
+    console.log('asdsadasdsadsa');
     const result = await this.usageService.find(query.page, query.limit);
 
     let token = '';
@@ -44,12 +45,6 @@ export class UsageController {
     } else {
       return { nickname: '', data: result, currentPage: query.page };
     }
-
-    // const result = await this.usageService.find(query.page, query.limit);
-    // return {
-    // data: result,
-    // currentPage: query.page,
-    // };
   }
 
   @Post('/usage')

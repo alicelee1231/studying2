@@ -59,8 +59,8 @@
           <input id="title" type="text" />
         </div>
         <div class="write">
-          <label for="name">작성자</label>
-          <input id="name" readonly type="text" / value="<%=nickname%>">
+          <label for="nickname">작성자</label>
+          <input id="nickname" readonly type="text" value="<%=nickname%>" />
         </div>
         <div class="write">
           <label for="기간">기간</label>
@@ -91,7 +91,7 @@
           <textarea name="" id="content" cols="30" rows="10"></textarea>
         </div>
         <div class="button_wrap">
-          <button id="" type="button" onclick="aaa()">등록하기</button>
+          <button id="" type="button" onclick="add()">등록하기</button>
           <button id="cancel" type="button">취소하기</button>
         </div>
       </form>
@@ -103,6 +103,6 @@
     </footer>
 
     <script src="/js/usage.js"></script>
-    <script src="/js/detail.js"></script>
+    <!-- <script src="/js/detail.js"></script> -->
   </body>
 </html>

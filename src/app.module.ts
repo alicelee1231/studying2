@@ -9,6 +9,8 @@ import { UserModule } from './apis/user/user.module';
 import { AuthModule } from './apis/auth/auth.module';
 import { RedisClientOptions } from 'redis';
 import * as redisStore from 'cache-manager-redis-store';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -21,11 +23,11 @@ import * as redisStore from 'cache-manager-redis-store';
     DetailModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'my-database',
+      host: '10.27.16.2', //sql비공개주소
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'mvc',
+      database: 'myserver', //sql database
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
@@ -33,9 +35,11 @@ import * as redisStore from 'cache-manager-redis-store';
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://my-redis:6379',
+      url: 'redis://10.27.17.3:6379',
       isGlobal: true,
     }),
   ],
+  providers: [AppService],
+  controllers: [AppController],
 })
 export class AppModule {}
