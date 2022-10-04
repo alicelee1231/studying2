@@ -24,6 +24,6 @@ function modify() {
     });
 
   fetch('/usage').then(function () {
-    window.location = 'http://localhost:3000/usage';
+    window.location = 'https://mymvc.shop/usage';
   });
 }

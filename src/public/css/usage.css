@@ -74,6 +74,12 @@ header .desktopHeader .login .loginText:hover {
   font-weight: bold;
   font-size: 1.1rem;
 }
+
+.usage_wrapper {
+  width: 90%;
+  margin: 0 auto;
+  height: 70vh;
+}
 /**  line_wrap  ***/
 .line_wrap {
   border-top: 2px solid #000;
@@ -89,7 +95,7 @@ header .desktopHeader .login .loginText:hover {
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: 20px 0;
+  padding: 30px 0 0 0;
 }
 
 .write_wrap .write {
@@ -98,21 +104,18 @@ header .desktopHeader .login .loginText:hover {
   align-items: center;
   color: #000;
   background-color: #d3d3d3;
-  height: 40px;
+  height: 50px;
   width: 200px;
   border-radius: 10px;
   font-weight: bold;
-  transition: transform 250ms;
   cursor: pointer;
 }
 
-.write_wrap a:hover {
+/* .write_wrap .write:hover {
   background-color: #fff;
   color: #000;
-  border: 2px solid #000;
-  transform: translateY(3px);
-}
-
+  border: 1px solid #000;
+} */
 /**  health_wrapper  **/
 .health_wrapper {
   height: 70vh;

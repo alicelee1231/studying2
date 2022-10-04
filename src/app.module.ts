@@ -24,10 +24,11 @@ import { AppService } from './app.service';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '10.27.16.2', //sql비공개주소
+      //mydatabase
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'myserver', //sql database
+      database: 'myserver', //sql database mvc
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
@@ -36,6 +37,7 @@ import { AppService } from './app.service';
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
       url: 'redis://10.27.17.3:6379',
+      //my-redis
       isGlobal: true,
     }),
   ],

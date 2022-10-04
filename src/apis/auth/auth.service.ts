@@ -44,7 +44,7 @@ export class AuthService {
       });
     }
     this.setToken({ user: userFound, req, res });
-    res.redirect('http://localhost:3000');
+    res.redirect('/');
     return userFound;
   }
 
@@ -53,7 +53,7 @@ export class AuthService {
     try {
       jwt.verify(token, process.env.KEY);
       res.cookie('token', '');
-      res.redirect('http://localhost:3000');
+      res.redirect('/');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();

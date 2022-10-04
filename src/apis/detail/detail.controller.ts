@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Render } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Render,
+  Req,
+} from '@nestjs/common';
+import { Request } from 'express';
+import * as jwt from 'jsonwebtoken';
 import { DetailService } from './detail.service';
 
 @Controller('detail')
@@ -9,9 +19,25 @@ export class DetailController {
 
   @Get('/:id')
   @Render('detail')
-  async detail(@Param('id') id: string) {
+  async detail(
+    @Param('id') id: string, //
+    @Req() req: Request,
+  ) {
     const result = await this.detailService.findOne(id);
-    return { data: result };
+    let token = '';
+    if (req.headers.cookie) {
+      token = req.headers.cookie.split('token=')[1];
+    } else {
+      return { nickname: '', data: result };
+    }
+    if (token === '') {
+      return { nickname: '', data: result };
+    } else if (token !== undefined) {
+      const checkToken = jwt.verify(token, process.env.KEY);
+      return { nickname: checkToken['nickname'], data: result };
+    } else {
+      return { nickname: '', data: result };
+    }
   }
 
   @Delete('/')
