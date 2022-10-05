@@ -78,7 +78,7 @@ header .desktopHeader .login .loginText:hover {
 .usage_wrapper {
   width: 90%;
   margin: 0 auto;
-  height: 40vh;
+  height: 50vh;
 }
 /**  line_wrap  ***/
 .line_wrap {
@@ -129,8 +129,8 @@ header .desktopHeader .login .loginText:hover {
 table,
 th,
 td {
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
   padding: 13px 0;
   border-collapse: collapse;
 }
@@ -143,7 +143,7 @@ td {
 
 .table tbody tr td {
   border-bottom: 2px solid rgba(170, 169, 169);
-  padding: 9px 0;
+  padding: 12px 0;
   font-size: 0.8rem;
 }
 

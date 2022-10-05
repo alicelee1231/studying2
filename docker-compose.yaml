@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   my-backend:
-    image: asia.gcr.io/polar-arcana-361702/mymvc:2.8
+    image: asia.gcr.io/polar-arcana-361702/mymvc:2.9
     platform: linux/x86_64
     build:
       context: .
@@ -14,16 +14,16 @@ services:
     ports:
       - 3000:3000
 
-  mydatabase:
-    platform: linux/x86_64
-    image: mysql:latest
-    environment:
-      MYSQL_DATABASE: 'mvc'
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      - 3306:3306
+  # mydatabase:
+  #   platform: linux/x86_64
+  #   image: mysql:latest
+  #   environment:
+  #     MYSQL_DATABASE: 'mvc'
+  #     MYSQL_ROOT_PASSWORD: 'root'
+  #   ports:
+  #     - 3306:3306
 
-  my-redis:
-    image: redis:latest
-    ports:
-      - 6379:6379
+  # my-redis:
+  #   image: redis:latest
+  #   ports:
+  #     - 6379:6379

@@ -19,7 +19,7 @@ export class UsageService {
       order: {
         id: 'DESC',
       },
-      skip: (page - 1) * 10,
+      skip: (Number(page ?? 1) - 1) * 10,
       take: 10,
     });
   }
