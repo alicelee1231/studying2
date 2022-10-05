@@ -26,10 +26,10 @@ export class UsageController {
   ) {
     let token, nickname;
     if (req.headers.cookie) {
+      console.log(req.headers.cookie, 'faldhfaldfhlakhfkdlash');
       token = req.headers.cookie.split('token=')[1];
       nickname = jwt.verify(token, process.env.KEY)['nickname'];
-    } else {
-      nickname = '';
+    } else if (token === '') {
     }
 
     const count = await this.usageService.count();
