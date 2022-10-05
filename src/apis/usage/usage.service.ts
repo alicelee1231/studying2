@@ -10,21 +10,18 @@ export class UsageService {
     private readonly usageRepository: Repository<Usage>,
   ) {}
 
-  async find(page: string, limit: string) {
-    // const parsedPage = parseInt(page);
-    // const parsedLimit = parseInt(limit);
-    // const count = await this.usageRepository.count();
-    // const maxPage = Math.ceil(count / parsedLimit);
+  async count() {
+    return await this.usageRepository.count();
+  }
 
-    const result = await this.usageRepository.find({
+  async findPage({ page }) {
+    return await this.usageRepository.find({
       order: {
-        id: 'desc',
+        id: 'DESC',
       },
-      //   skip: (parsedPage - 1) * parsedLimit,
-      //   take: parsedLimit,
+      skip: (page - 1) * 10,
+      take: 10,
     });
-    //   console.log(result, '===============');
-    return result;
   }
 
   async findOne(id) {
@@ -44,13 +41,6 @@ export class UsageService {
     return await this.usageRepository.save({
       createdAt: currentDate,
       ...createUsageInput,
-      // counting: data.counting,
-      // title: data.title,
-      // area: data.area,
-      // content: data.content,
-      // sort: data.sort,
-      // period: data.period,
-      // goal: data.goal,
     });
   }
 }

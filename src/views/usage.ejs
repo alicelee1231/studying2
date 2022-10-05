@@ -23,7 +23,7 @@
         </div>
         <nav>
           <li><a href="/about">소개</a></li>
-          <li><a href="/usage?page=1&limit=10">우리들의 사용량</a></li>  
+          <li><a href="/usage?id=1">우리들의 사용량</a></li>
           <div class="loginId">
             <% if(nickname){%>
             <span class="loging"><%=nickname%>님 환영합니다.</span>
@@ -59,19 +59,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-                <% data.forEach(el => {%>
-                <td><%=el.id%></td>
-                <td><%=el.area%></></td>
-                <td><%=el.sort%></td>
-                <td>
-                  <a href="/detail/<%=el.id%>"><%=el.title%></a>
-                </td>
-                <td><%=nickname%></td>
-                <td><%=el.createdAt%></td>
-              </tr>          
-              <% }) %>
-            </ul>
+            <% page.forEach(el => {%>
+              <td><%=el.id%></td>
+              <td><%=el.area%></></td>
+              <td><%=el.sort%></td>
+              <td>
+                <a href="/detail/<%=el.id%>"><%=el.title%></a>
+              </td>
+              <td><%=nickname%></td>
+              <td><%=el.createdAt%></td>
+            </tr>          
+            <% }) %>
           </tbody>
         </table>
       </div>
@@ -81,32 +79,42 @@
     <div class="page_wrap">
       <div class="paging">
         <div class="ctrlBack">
-          <a href="/usage" id="leftStart" class="leftStart">
+          <a href="/usage?id=1" id="leftStart" class="leftStart">
             <i class="arrow fa-solid fa-angles-left"></i>
           </a>
-
-          <a href="" id="left" class="right">
-            <i class="arrow fa-solid fa-angle-left"></i>
-          </a>
+          <% if( Number(currentPage) <= 1) { %>
+            <a href="/usage?id=<%= 1 %>" id="left" class="right">
+              <i class="arrow fa-solid fa-angle-left"></i>
+            </a>
+          <% } else { %>
+            <a href="/usage?id=<%=  Number(currentPage) - 1 %>" id="left" class="right">
+              <i class="arrow fa-solid fa-angle-left"></i>
+            </a>
+          <% } %>
+         
 
           <div class="pageNum" id="pageNum">
-            <% ['1','2','3','4','5'].forEach(pageNum => { %>
-            <div class="pageBtn<%= currentPage === pageNum ? ' actived' : ''%>">
-              <a
-                href="/health?page=<%= pageNum%>&limit=10"
-                id="pageButton1"
-                class=""
-                ><%= pageNum %></a
-              >
-            </div>
-            <% }) %>
+          <% if(pageCount >= 5 ) { %>
+            <% for ( let i = 0 ; i < 5 ; i++) { %>
+              <a class="pageBtn" href="/usage?id=<%= i+1 %>"><%= i + 1 %></a>
+            <% } %>
+          <% } else { %>
+            <% for ( let i = 0 ; i < pageCount ; i++) { %>
+              <a class="pageBtn" href="/usage?id=<%= i+1 %>"><%= i + 1 %></a>
+            <% } %>
+          <% } %>
           </div>
+          <% if( Number(currentPage) >= pageCount) { %>
+            <a href="/usage?id=<%= pageCount %>" id="right" class="right">
+              <i class="arrow fa-solid fa-angle-right"></i>
+            </a>
+          <% } else { %>
+            <a href="/usage?id=<%= Number(currentPage) + 1 %>" id="right" class="right">
+              <i class="arrow fa-solid fa-angle-right"></i>
+            </a>
+          <% } %>
 
-          <a href="" id="right" class="right">
-            <i class="arrow fa-solid fa-angle-right"></i>
-          </a>
-
-          <a href="/recruit_art/all?id=7" id="rightEnd" class="rightEnd">
+          <a href="/usage?id=<%= pageCount %>" id="rightEnd" class="rightEnd">
             <i class="arrow fa-solid fa-angles-right"></i>
           </a>
         </div>

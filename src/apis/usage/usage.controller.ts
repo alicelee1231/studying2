@@ -21,30 +21,25 @@ export class UsageController {
   @Get('/usage')
   @Render('usage')
   async usage(
-    @Query() query: { page: string; limit: string; maxPage: string },
+    @Query() query: string,
     @Req() req: Request, //
   ) {
-    console.log('asdsadasdsadsa');
-    const result = await this.usageService.find(query.page, query.limit);
-
-    let token = '';
+    let token, nickname;
     if (req.headers.cookie) {
       token = req.headers.cookie.split('token=')[1];
+      nickname = jwt.verify(token, process.env.KEY)['nickname'];
     } else {
-      return { nickname: '', data: result, currentPage: query.page };
+      nickname = '';
     }
-    if (token === '') {
-      return { nickname: '', data: result, currentPage: query.page };
-    } else if (token !== undefined) {
-      const checkToken = jwt.verify(token, process.env.KEY);
-      return {
-        nickname: checkToken['nickname'],
-        data: result,
-        currentPage: query.page,
-      };
-    } else {
-      return { nickname: '', data: result, currentPage: query.page };
-    }
+
+    const count = await this.usageService.count();
+    const page = await this.usageService.findPage({ page: query['id'] });
+    return {
+      pageCount: Math.ceil(count / 10),
+      nickname,
+      page,
+      currentPage: query['id'],
+    };
   }
 
   @Post('/usage')
