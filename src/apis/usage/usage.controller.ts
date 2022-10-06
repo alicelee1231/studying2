@@ -26,12 +26,15 @@ export class UsageController {
   ) {
     let token, nickname;
     if (req.headers.cookie) {
-      console.log(req.headers.cookie, 'faldhfaldfhlakhfkdlash');
-      token = req.headers.cookie.split('token=')[1];
-      nickname = jwt.verify(token, process.env.KEY)['nickname'];
-    } else if (token === '') {
+      try {
+        token = req.headers.cookie.split('token=')[1];
+        nickname = jwt.verify(token, process.env.KEY)['nickname'];
+      } catch {
+        nickname = '';
+      }
+    } else {
+      nickname = '';
     }
-
     const count = await this.usageService.count();
     const page = await this.usageService.findPage({ page: query['id'] });
     return {

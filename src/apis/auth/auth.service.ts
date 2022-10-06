@@ -53,7 +53,7 @@ export class AuthService {
     try {
       jwt.verify(token, process.env.KEY);
       res.cookie('token', '');
-      res.redirect('/');
+      res.redirect('/login');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();
