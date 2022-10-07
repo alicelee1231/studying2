@@ -7,19 +7,34 @@
     <link rel="stylesheet" href="/css/common.css" />
     <link rel="stylesheet" href="/css/write.css" />
     <!-- axios 사용 -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/8ddf9e168a.js"
+      crossorigin="anonymous"
+    ></script>
+
     <title>수정하기</title>
   </head>
   <body>
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
-          <a href="/">SaveWorld</a>
+          <a href="/">SaveTheWorld</a>
         </div>
         <nav>
-          <li><a href="#">소개</a></li>
-          <li><a href="#">우리들의 사용량</a></li>
-          <li><a class="loginText" href="/login">로그인</a></li>
+          <li><a href="/about">소개</a></li>
+          <li><a href="/usage?id=1">우리들의 사용량</a></li>
+          <div class="loginId">
+            <% if(nickname){%>
+            <span class="loging" id="updateName1"><%=nickname%></span>님 환영합니다.
+            <span class="logout"
+              ><a href="/logout"
+                ><i class="fa-solid fa-right-from-bracket"></i></a
+            ></span>
+            <%} else {%>
+            <li><a href="/login">로그인</a></li>
+            <%}%>
+          </div>
         </nav>
       </div>
     </header>
@@ -49,6 +64,8 @@
             type="text"
           />
         </div>
+        <input  id="idid" value="<%=data.id%>" style="display:none"></input>
+        <input  id="updateName2" value="<%=data.nickname %>" style="display:none"></input>
         <div class="write">
           <label for="기간">기간</label>
           <input id="period" value="<%=data.period %>" type="text" />
@@ -77,6 +94,5 @@
     </footer>
 
     <script src="/js/update.js"></script>
-    <script src="/js/detail.js"></script>
   </body>
 </html>

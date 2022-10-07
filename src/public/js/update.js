@@ -5,25 +5,24 @@ function modify() {
   const sort = type.options[type.selectedIndex].value;
   const period = document.getElementById('period').value;
   const goal = document.getElementById('goal').value;
+  const id = document.getElementById('idid').value;
+  const updateName1 = document.getElementById('updateName1').innerText;
+  const updateName2 = document.getElementById('updateName2').value;
 
-  axios
-    .put('/update', {
-      title,
-      content,
-      sort,
-      period,
-      goal,
-    })
-
-    .then((res) => {
-      div.innerText = res.data.title;
-      div.innerText = res.data.content;
-      div.innerText = res.data.sort;
-      div.innerText = res.data.period;
-      div.innerText = res.data.goal;
-    });
-
-  fetch('/usage').then(function () {
-    window.location = 'https://mymvc.shop/usage';
-  });
+  if (updateName1 === updateName2) {
+    axios
+      .put('/update', {
+        id,
+        title,
+        content,
+        sort,
+        period,
+        goal,
+      })
+      .then(function () {
+        window.location = '/usage';
+      });
+  } else {
+    alert('글쓴이만 수정 할 수 있습니다.');
+  }
 }

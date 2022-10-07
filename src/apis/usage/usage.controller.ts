@@ -46,7 +46,9 @@ export class UsageController {
   }
 
   @Post('/usage')
-  async click(@Body() createUsageInput: CreateUsageInput) {
+  async click(
+    @Body() createUsageInput: CreateUsageInput, //
+  ) {
     return await this.usageService.create(createUsageInput);
   }
 

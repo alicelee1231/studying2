@@ -19,7 +19,6 @@ export class UpdateService {
   }
 
   async update({ req, updateUsageInput }) {
-    console.log('-------------------------');
     const findUpdate = await this.updateRepository.findOne({
       where: { title: req.body.title },
     });
@@ -32,7 +31,6 @@ export class UpdateService {
         ...updateUsageInput,
       },
     );
-    console.log(result);
     return result;
   }
 }

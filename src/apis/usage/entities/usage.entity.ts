@@ -1,10 +1,7 @@
-import { Detail } from 'src/apis/detail/entities/detail.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -14,40 +11,33 @@ export class Usage {
   @PrimaryGeneratedColumn('increment')
   id: string;
 
-  @Column({ default: true })
-  counting: number;
-
-  @Column({ default: true })
+  @Column()
   title: string;
 
-  @Column({ default: true })
-  userId: string;
-
-  @Column({ default: true })
+  @Column()
   area: string;
 
-  @Column({ default: true })
+  @Column()
   content: string;
 
-  @Column({ default: true })
-  createdAt: string;
+  @Column()
+  nickname: string;
 
-  @Column({ default: true })
+  @Column()
   sort: string;
 
-  @Column({ default: true })
+  @Column()
   period: string;
 
-  @Column({ default: true })
+  @Column()
   goal: string;
+
+  @Column()
+  createdAt: string;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
   @DeleteDateColumn()
   deletedAt: Date;
-
-  @OneToOne(() => Detail)
-  @JoinColumn()
-  detail: Detail;
 }

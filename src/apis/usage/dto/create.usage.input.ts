@@ -8,6 +8,9 @@ export class CreateUsageInput {
   title: string;
 
   @Column()
+  nickname: string;
+
+  @Column()
   area: string;
 
   @Column()
