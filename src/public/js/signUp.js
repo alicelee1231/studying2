@@ -23,13 +23,17 @@ function signUp() {
   });
 }
 
-document.getElementById('id_request').addEventListener('click', () => {
-  checkingNickname = document.getElementById('id_request').value;
-  axios //
-    .fetch('/signUp', {
-      nickname,
+function checkingUser() {
+  document.getElementById('id_request').addEventListener('click', () => {
+    checkingNickname = document.getElementById('id_request').value;
+    axios //
+      .fetch('/signUp', {
+        nickname,
+      });
+
+    //
+    fetch('/signUp').then(function () {
+      window.location = '/singUp';
     });
-  fetch('/signUp').then(function () {
-    window.location = '/singUp';
   });
-});
+}

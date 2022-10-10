@@ -23,3 +23,6 @@ function add() {
     window.location = '/usage';
   });
 }
+function cancelWrite() {
+  window.location = '/usage';
+}

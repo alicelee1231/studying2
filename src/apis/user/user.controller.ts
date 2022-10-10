@@ -20,7 +20,7 @@ export class UserController {
     return this.userService.create({ pwd: hashedPwd, userInfo });
   }
 
-  @Post('/signup')
+  @Get('/signup')
   async checkNickname(@Body() data) {
     const checking = await this.userService.findNickname({ data });
     if (!checking) {
