@@ -31,24 +31,19 @@
       <div class="sign_wrap">
         <div class="sign">
           <label for="id">닉네임</label>
-          <input type="text" id="nickname" placeholder="닉네임을 입력하세요" />
-        </div>
-        <div class="sign modify">
-          <label for="email">이메일</label>
           <input
             type="text"
-            id="email"
+            id="nickname"
             class="mo1"
-            placeholder="이메일을 입력하세요"
+            placeholder="닉네임을 입력하세요"
           />
-          <input
-            type="button"
-            onclick="checkingUser()"
-            id="id_request"
-            name="id_request"
-            class="mo2"
-            value="중복확인"
-          />
+          <button type="button" class="mo2" onclick="checkId()">
+            중복확인
+          </button>
+        </div>
+        <div class="sign">
+          <label for="email">이메일</label>
+          <input type="text" id="email" placeholder="이메일을 입력하세요" />
         </div>
         <div class="sign">
           <label for="pwd">비밀번호</label>
@@ -59,7 +54,15 @@
           <input type="text" id="phone" placeholder="휴대폰번호를 입력하세요" />
         </div>
         <div class="check">
-          <button type="button" onclick="signUp()">회원가입</button>
+          <button
+            type="button"
+            onclick="signUp()"
+            disabled
+            style="color: #dfdfdf"
+            id="signupBtn"
+          >
+            회원가입
+          </button>
           <button type="button">취소</button>
         </div>
       </div>

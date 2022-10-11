@@ -1,3 +1,13 @@
+let name1;
+if (document.getElementById('updateName1'))
+  name1 = document.getElementById('updateName1').innerText;
+const name2 = document.getElementById('updateName2').value;
+
+if (name1 !== name2 || !name1) {
+  alert('유저 정보가 올바르지 않습니다.');
+  window.location = '/usage?id=1';
+}
+
 function modify() {
   const title = document.getElementById('title').value;
   const content = document.getElementById('content').value;
@@ -6,23 +16,17 @@ function modify() {
   const period = document.getElementById('period').value;
   const goal = document.getElementById('goal').value;
   const id = document.getElementById('idid').value;
-  const updateName1 = document.getElementById('updateName1').innerText;
-  const updateName2 = document.getElementById('updateName2').value;
 
-  if (updateName1 === updateName2) {
-    axios
-      .put('/update', {
-        id,
-        title,
-        content,
-        sort,
-        period,
-        goal,
-      })
-      .then(function () {
-        window.location = '/usage';
-      });
-  } else {
-    alert('글쓴이만 수정 할 수 있습니다.');
-  }
+  axios
+    .put('/update', {
+      id,
+      title,
+      content,
+      sort,
+      period,
+      goal,
+    })
+    .then(function () {
+      window.location = '/usage';
+    });
 }

@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Render,
   Req,
   Res,
   UnprocessableEntityException,
@@ -31,6 +32,19 @@ export class AuthController {
     private readonly userService: UserService,
     private readonly userController: UserController,
   ) {}
+
+  @Get('/login')
+  @Render('login')
+  async loginId() {}
+
+  @Post('/checkId')
+  async checkId(
+    @Body() data: any, //
+  ) {
+    const user = await this.userService.findNickname({ data: data.nickname });
+    console.log(user, '==================');
+    return user ? false : true;
+  }
 
   @UseGuards()
   @Post('/login')

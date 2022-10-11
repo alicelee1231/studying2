@@ -137,6 +137,18 @@ form {
   background-color: #fff !important;
 }
 
+.naver a {
+  padding: 10px 100px;
+}
+
+.kakao a {
+  padding: 10px 100px;
+}
+
+.google a {
+  padding: 10px 100px;
+}
+
 .login .naver img {
   width: 30px;
   position: absolute;

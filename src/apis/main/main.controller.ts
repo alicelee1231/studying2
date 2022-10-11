@@ -9,8 +9,4 @@ export class MainController {
   @Get('/main')
   @Render('main')
   async board() {}
-
-  @Get('/login')
-  @Render('login')
-  async login(@Req() req: Request) {}
 }
