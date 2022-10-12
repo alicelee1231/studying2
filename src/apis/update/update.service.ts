@@ -22,7 +22,6 @@ export class UpdateService {
     const findUpdate = await this.updateRepository.findOne({
       where: { title: req.body.title },
     });
-    console.log(findUpdate);
     const result = await this.updateRepository.update(
       {
         id: findUpdate.id,
